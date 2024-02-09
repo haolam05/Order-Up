@@ -1,0 +1,21 @@
+<html>
+
+<head>
+  {% if title %}
+  <title>{{ title }} - Order Up!</title>
+  {% else %}
+  <title>Welcome to Order Up!</title>
+  {% endif %}
+  <link rel="stylesheet" href="/static/styles/index.css">
+</head>
+
+<body>
+  {% block content %}{% endblock %}
+  {% if not current_user.is_anonymous %}
+  <form method="post" action="{{ url_for('session.logout') }}">
+    <button type="submit">Logout</button>
+  </form>
+  {% endif %}
+</body>
+
+</html>

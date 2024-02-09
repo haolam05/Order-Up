@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Order Up!</h1>
+<div class="assign-tables">
+  <form method="post" action="{{ url_for('.assign_table') }}">
+    <h2>ASSIGN TABLE</h2>
+    {{ form.csrf_token }}
+    <div>
+      {{ form.tables.label }}
+      {{ form.tables }}
+    </div>
+    <div>
+      {{ form.servers.label }}
+      {{ form.servers }}
+    </div>
+    {{ form.assign }}
+  </form>
+</div>
+<div class="menu-items">
+  <form method="post" id="food-list">
+    {{ form_2.csrf_token }}
+    <h2>{{ form_2.menu_item_ids.label }}</h2>
+    <div>
+      {{ form_2.menu_item_ids }}
+    </div>
+  </form>
+</div>
+<div class="open-orders">
+  <h2>YOUR OPEN ORDERS</h2>
+  {% for order in orders %}
+  <div>
+    <div class="line-break"></div>
+    <form id="close-table">
+      <span>Table {{ order.table_id }}</span>
+      <span>${{ table_to_sum[order.table_id] if table_to_sum[order.table_id] else 0 }}</span>
+      <!-- That button will submit the form with the id food-list and send it to the URL /tables/close/:id even though the button is not in that form. -->
+      <button form="close-table" formaction="/tables/close/{{ order.id }}">CLOSE TABLE</button>
+      <button form="food-list" formaction="/tables/add_to_order/{{ order.id }}">ADD TO ORDER</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

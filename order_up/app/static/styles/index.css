@@ -1,0 +1,22 @@
+.assign-tables {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.assign-tables form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-items select {
+  height: 100px;
+}
+
+.open-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+}
